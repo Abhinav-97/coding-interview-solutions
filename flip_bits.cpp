@@ -11,7 +11,7 @@ int bitSwapRequired(int a, int b) {
 
 int bitSwapRequiredopt(int a, int b) {
 	int count = 0;
-	for (int c = a Ab; c != 0; c = c & (c-1)) {
+	for (int c = a ^ b; c != 0; c = c & (c-1)) {
 		count++;
 	}
 	return count;
@@ -19,5 +19,6 @@ int bitSwapRequiredopt(int a, int b) {
 
 int main()
 {
-	cout<<bitSwapRequired(34, 9);	
+	char s[] = "abhinav";
+	printf("%s", s + s[2]);
 }
