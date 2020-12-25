@@ -21,37 +21,32 @@ public:
 ​
 class Solution {
 public:
-    unordered_map<Node*, Node*> mp;
+    
     Node* cloneGraph(Node* node) {
+        unordered_map<Node*, Node*> mp;
+        dfs(node, mp);
+        return mp[node];
+    }
+    void dfs(Node* node, unordered_map<Node*, Node*> &mp)
+    {
         if(node == NULL)
         {
-            return NULL;
+            return;
         }
-        Node* newNode = new Node(node->val, {});
-        
-        mp[node] = newNode;
-        
-        queue<Node*> q;
-        q.push(node);
-        
-        while(!q.empty())
+        if(mp[node] != NULL)
         {
-            Node* curr = q.front();
-            q.pop();
-            
-            vector<Node*> vec = curr->neighbors;
-            for(int i=0;i<vec.size();i++)
-            {
-                if(mp.find(vec[i]) == mp.end())
-                {
-                    Node* neighbourNode = new Node(vec[i]->val,{});
-                    mp[vec[i]] = neighbourNode;
-                    q.push(vec[i]);
-                }
-                
-                mp[curr]->neighbors.push_back(mp[vec[i]]);
-            }
+            return;
         }
-        return newNode;
+        Node* cloneNode = new Node(node->val);
+        mp[node] = cloneNode;
+        vector<Node*> vec = node->neighbors;
+        for(int i=0;i<vec.size();i++)
+        {
+            if(mp.find(vec[i]) == mp.end())
+            {
+                dfs(vec[i], mp);
+            }
+            mp[node]->neighbors.push_back(mp[vec[i]]);
+        }
     }
 };
