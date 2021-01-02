@@ -17,9 +17,9 @@ public:
         {
             dp[0][i] = false;
         }
-        for(int i=0;i<nums.size();i++)
+        for(int j=0;j<nums.size();j++)
         {
-            dp[i][0] = true;
+            dp[j][0] = true;
         }
         for(int i=1;i<nums.size();i++)
         {
@@ -32,7 +32,6 @@ public:
                 else{
                     dp[i][j] = dp[i-1][j];
                 }
-                    
             }
         }
         return dp[nums.size()-1][sum];
