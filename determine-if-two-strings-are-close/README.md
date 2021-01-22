@@ -1,3 +1,4 @@
+[Discussion Post (created on 22/0/2021 at 21:12)](https://leetcode.com/problems/determine-if-two-strings-are-close/submissions/)  
 <h2>1657. Determine if Two Strings Are Close</h2><h3>Medium</h3><hr><div><p>Two strings are considered <strong>close</strong> if you can attain one from the other using the following operations:</p>
 
 <ul>
