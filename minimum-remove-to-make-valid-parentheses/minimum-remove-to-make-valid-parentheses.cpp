@@ -1,55 +1,35 @@
 class Solution {
 public:
     string minRemoveToMakeValid(string s) {
-        stack<char> st;
+        int openBrackets = 0;
         string firstPass = "";
         for(int i=0;i<s.length();i++)
         {
             if(s[i] == ')')
             {
-                if(!st.empty())
+                if(openBrackets == 0)
                 {
-                    st.pop();
-                    firstPass += s[i];
+                    continue;
                 }
+                openBrackets--;
+
             }
             else if(s[i] == '(')
             {
-                st.push(s[i]);
-                firstPass += s[i];
+                openBrackets++;
             }
-            else{
-                firstPass += s[i];
-            }
-        }
-        if(st.empty())
-        {
-            return firstPass;
+            firstPass += s[i];
         }
         string ans = "";
-        while(!st.empty())
+
+        for(int i=firstPass.length()-1;i>=0;i--)
         {
-            st.pop();
-        }
-        reverse(firstPass.begin(), firstPass.end());
-        for(int i=0;i<firstPass.length();i++)
-        {
-            if(firstPass[i] == '(')
+            if(firstPass[i] == '(' && openBrackets > 0)
             {
-                if(!st.empty())
-                {
-                    st.pop();
-                    ans += firstPass[i];
-                }
+                openBrackets--;
+                continue;
             }
-            else if(firstPass[i] == ')')
-            {
-                st.push(firstPass[i]);
-                ans += firstPass[i];
-            }
-            else{
-                ans += firstPass[i];
-            }
+            ans += firstPass[i];
         }
         reverse(ans.begin(), ans.end());
         return ans;
