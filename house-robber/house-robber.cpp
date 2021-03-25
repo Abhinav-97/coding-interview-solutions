@@ -1,17 +1,23 @@
 class Solution {
 public:
     int rob(vector<int>& nums) {
-        if(nums.empty())
+        vector<int> dp(nums.size(), -1);
+        int ans = helper(nums, 0, dp);
+        return ans;
+    }
+    
+    int helper(vector<int> &nums, int i, vector<int> &dp)
+    {
+        if(i >= nums.size())
         {
             return 0;
         }
-        int dp[nums.size()+1];
-        dp[0] = 0;
-        dp[1] = nums[0];
-        for(int i=2;i<=nums.size();i++)
+        if(dp[i] != -1)
         {
-            dp[i] = max(dp[i-1], dp[i-2]+nums[i-1]);
+            return dp[i];
         }
-        return dp[nums.size()];
+        int robHouse = nums[i] + helper(nums, i+2, dp);
+        int dontRobHouse = helper(nums, i+1, dp);
+        return dp[i] = max(robHouse, dontRobHouse);
     }
 };
