@@ -21,9 +21,8 @@ public:
         if(root == NULL)
         {
             return true;
-            
         }
-        if((min != INT_MIN+1 && root->val <= min) || (max != INT_MIN+1 && root->val >= max ))
+        if((max != INT_MIN+1 && root->val >= max) || (min != INT_MIN+1 && root->val <= min))
         {
             return false;
         }
